@@ -5,22 +5,26 @@ import Image from "next/image";
 export default async function Home() {
   const products = await fetchProducts();
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Lista de Produtos</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {products.map((product: Product) => (
-          <div key={product.id} className="border p-4 rounded shadow">
-            <Image
-              src={product.image}
-              alt={product.title}
-              width={200}
-              height={200}
-              className="mx-auto object-contain"
-            />
-            <h2 className="text-lg font-semibold">{product.title}</h2>
-            <p className="text-gray-600">${product.price}</p>
-          </div>
-        ))}
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="sr-only">Lista de Produtos</h2>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {products.map((product: Product) => (
+            <a key={product.id} href={"/"} className="group p-3 rounded-lg bg-gray-200">
+              <Image
+                src={product.image}
+                alt={product.title}
+                width={500}
+                height={500}
+                className="aspect-square w-auto h-auto rounded-lg bg-gray-200 object-fill group-hover:opacity-75 xl:aspect-7/8"
+              />
+              <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
+              <p className="mt-1 text-lg font-medium text-gray-900">
+                R$ {product.price}
+              </p>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
