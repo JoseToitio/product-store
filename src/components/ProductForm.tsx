@@ -139,37 +139,6 @@ export default function ProductForm({
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-800">
-            Avaliação (0 a 5)
-          </label>
-          <input
-            type="number"
-            step="0.1"
-            {...register("rating.rate")}
-            className="w-full p-2 border rounded text-gray-700 "
-          />
-          {errors.rating?.rate && (
-            <p className="text-red-500 text-sm">{errors.rating.rate.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-800">
-            Número de Avaliações
-          </label>
-          <input
-            type="number"
-            {...register("rating.count")}
-            className="w-full p-2 border rounded text-gray-700 "
-          />
-          {errors.rating?.count && (
-            <p className="text-red-500 text-sm">
-              {errors.rating.count.message}
-            </p>
-          )}
-        </div>
-
         <button
           type="submit"
           disabled={isPending}
