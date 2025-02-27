@@ -20,3 +20,30 @@ export const fetchProductsByCategory = async (category: string) => {
   return response.json();
 };
 
+export const createProduct = async (data: IProduct) => {
+  const response = await fetch(`${API_URL}/products`,  {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) throw new Error("Failed to create products by data");
+  return response.json();
+};
+
+export const updateProductsById = async (id: string, data: IProduct) => {
+  const response = await fetch(`${API_URL}/products/${id}`,  {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) throw new Error("Failed to update products by data or id");
+  return response.json();
+};
+
+export const deleteProductById = async (id: string) => {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to delete products by id");
+  return response.json();
+}

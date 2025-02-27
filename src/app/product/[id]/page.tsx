@@ -35,7 +35,7 @@ export default function ProductPage() {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
-  console.log(product);
+
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
