@@ -1,3 +1,5 @@
+import { IProduct } from "./types";
+
 const API_URL = "https://fakestoreapi.com";
 
 export const fetchProducts = async () => {
@@ -6,7 +8,7 @@ export const fetchProducts = async () => {
   return response.json();
 };
 
-export const fetchProductById = async (id: number) => {
+export const fetchProductById = async (id: number): Promise<IProduct> => {
   const response = await fetch(`${API_URL}/products/${id}`);
   if (!response.ok) throw new Error("Failed to fetch product");
   return response.json();
@@ -17,3 +19,4 @@ export const fetchProductsByCategory = async (category: string) => {
   if (!response.ok) throw new Error("Failed to fetch products by category");
   return response.json();
 };
+
