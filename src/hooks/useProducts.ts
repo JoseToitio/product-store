@@ -39,8 +39,10 @@ export const useProducts = () => {
   const createProductMutation = async (product: IProduct) => {
     try {
       const newProduct = await createProduct(product);
+      console.log('cai aqui')
       dispatch(addProduct(newProduct));
     } catch (error) {
+      console.log('cai aqui')
       console.error("Erro ao criar produto:", error);
     }
   };
@@ -68,7 +70,7 @@ export const useProducts = () => {
       console.error("Erro ao deletar produto:", error);
     }
   };
-  console.log(products);
+
   const getProductById = (id: number): IProduct | null => {
     if (products.length > 0) {
       return products.find((product) => product.id === id) || null;

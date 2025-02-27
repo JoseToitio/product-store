@@ -8,7 +8,7 @@ interface IPagination {
 }
 export default function Pagination({setPage, page, totalPages}: IPagination) {
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-8">
           <button
             onClick={() => setPage((prev: number) => Math.max(prev - 1, 1))}
             disabled={page === 1}

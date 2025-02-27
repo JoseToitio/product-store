@@ -6,6 +6,10 @@ import { StarIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 
+export function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const productId = Number(id);
@@ -31,10 +35,6 @@ export default function ProductPage() {
         Erro ao carregar o produto.
       </div>
     );
-  }
-
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
   }
 
   return (

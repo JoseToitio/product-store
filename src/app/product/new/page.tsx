@@ -1,23 +1,23 @@
 "use client";
 
-import ProductForm, { ProductFormData } from "@/components/ProductForm";
-import { createProduct } from "@/services/api";
-import { useMutation } from "@tanstack/react-query";
+import ProductForm from "@/components/ProductForm";
+import { useProducts } from "@/hooks/useProducts";
+import { IProduct } from "@/services/types";
 import { useRouter } from "next/navigation";
 
 export default function NewProductPage() {
   const router = useRouter();
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (newProduct: ProductFormData) => createProduct(newProduct),
-    onSuccess: () => {
-      router.push("/");
-    },
-  });
+  const { createProductMutation } = useProducts();
 
+  const handleSubmit = (newProduct: IProduct) => {
+    console.log('cai aqui')
+    createProductMutation(newProduct);
+    router.push("/");
+  };
   return (
     <ProductForm
-      mutate={mutate}
-      isPending={isPending}
+      onSubmit={handleSubmit}
+      isPending={false}
       title="Adicionar Novo Produto"
     />
   );

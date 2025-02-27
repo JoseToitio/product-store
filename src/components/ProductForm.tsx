@@ -9,6 +9,7 @@ const productSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, "O título deve ter pelo menos 3 caracteres")
+    .max(30, "O título deve ter menos de 30 caracteres" )
     .required("Campo obrigatório"),
   price: yup
     .number()
@@ -27,32 +28,21 @@ const productSchema = yup.object().shape({
     .string()
     .url("A URL da imagem deve ser válida")
     .required("Campo obrigatório"),
-  rating: yup.object().shape({
-    rate: yup
-      .number()
-      .typeError("A avaliação deve ser um número")
-      .min(0, "A avaliação mínima é 0")
-      .max(5, "A avaliação máxima é 5")
-      .required("Campo obrigatório"),
-    count: yup
-      .number()
-      .typeError("A quantidade de avaliações deve ser um número")
-      .min(0, "A quantidade mínima é 0")
-      .required("Campo obrigatório"),
-  }),
 });
 
 interface IProductForm {
-  mutate: UseMutateFunction<unknown, Error, IProduct, unknown>;
+  onSubmit: UseMutateFunction<unknown, Error, IProduct, unknown>;
   isPending: boolean;
   title: string;
+  buttonTitle?: string;
   initialData?: IProduct;
 }
 export type ProductFormData = yup.InferType<typeof productSchema>;
 export default function ProductForm({
-  mutate,
+  onSubmit,
   isPending,
   title,
+  buttonTitle = 'Adicionar Produto',
   initialData,
 }: IProductForm) {
   const {
@@ -75,14 +65,17 @@ export default function ProductForm({
     <div className="max-w-lg mx-auto p-6 bg-white rounded shadow-md my-10">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">{title}</h1>
       <form
-        onSubmit={handleSubmit((data) => mutate(data))}
+        onSubmit={handleSubmit((data) => onSubmit(data))}
         className="space-y-4"
       >
         <div>
           <label className="block text-sm font-medium text-gray-800">
             Título
           </label>
-          <input {...register("title")} className="w-full p-2 border rounded text-gray-700 " />
+          <input
+            {...register("title")}
+            className="w-full p-2 border rounded text-gray-700 "
+          />
           {errors.title && (
             <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
@@ -121,6 +114,7 @@ export default function ProductForm({
             Categoria
           </label>
           <input
+            disabled={initialData && true}
             {...register("category")}
             className="w-full p-2 border rounded text-gray-700 "
           />
@@ -133,7 +127,10 @@ export default function ProductForm({
           <label className="block text-sm font-medium text-gray-800">
             Imagem (URL)
           </label>
-          <input {...register("image")} className="w-full p-2 border rounded text-gray-700 " />
+          <input
+            {...register("image")}
+            className="w-full p-2 border rounded text-gray-700 "
+          />
           {errors.image && (
             <p className="text-red-500 text-sm">{errors.image.message}</p>
           )}
@@ -144,7 +141,7 @@ export default function ProductForm({
           disabled={isPending}
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
         >
-          {isPending ? "Adicionando..." : "Adicionar Produto"}
+          {isPending ? "Adicionando..." : buttonTitle}
         </button>
       </form>
     </div>
