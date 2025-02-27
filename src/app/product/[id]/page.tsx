@@ -44,7 +44,7 @@ export default function ProductPage() {
           alt={product.title}
           width={500}
           height={500}
-          className="rounded-lg shadow-lg size-auto"
+          className="rounded-lg shadow-lg aspect-square object-contain group-hover:opacity-75 xl:aspect-7/8 mix-blend-multiply"
         />
         <div>
           <p className="text-lg font-medium leading-8 text-indigo-600 mb-4">
@@ -57,7 +57,7 @@ export default function ProductPage() {
               R$ {product.price}
             </p>
             <div className="flex items-center justify-center">
-              {[0, 1, 2, 3, 4].map((rating) => (
+              {[0, 1, 2, 3, 4, 5].map((rating) => (
                 <StarIcon
                   key={rating}
                   aria-hidden="true"
@@ -70,12 +70,15 @@ export default function ProductPage() {
                 />
               ))}
             </div>
-            <a className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer">
-              {product.rating.count} reviews
-            </a>
+            <div className="flex items-center mt-1 ">
+              <p className="text-gray-950">{product.rating.rate}</p>
+              <a className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer">
+              ({product.rating.count} reviews)
+              </a>
+            </div>
           </div>
           <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            Adicionar ao Carrinho
+            Editar Produto
           </button>
         </div>
       </div>
