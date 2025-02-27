@@ -4,6 +4,7 @@ import { fetchProductById } from "@/services/api";
 import { StarIcon } from "@heroicons/react/16/solid";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 
 export default function ProductPage() {
@@ -73,13 +74,15 @@ export default function ProductPage() {
             <div className="flex items-center mt-1 ">
               <p className="text-gray-950">{product.rating.rate}</p>
               <a className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer">
-              ({product.rating.count} reviews)
+                ({product.rating.count} reviews)
               </a>
             </div>
           </div>
-          <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            Editar Produto
-          </button>
+          <Link href={`/edit-product/${productId}`}>
+            <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              Editar Produto
+            </button>
+          </Link>
         </div>
       </div>
     </div>

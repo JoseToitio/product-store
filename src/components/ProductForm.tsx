@@ -62,7 +62,7 @@ export default function ProductForm({
     reset,
   } = useForm<ProductFormData>({
     resolver: yupResolver(productSchema),
-    defaultValues: initialData,
+    defaultValues: initialData || {},
   });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function ProductForm({
   }, [initialData, reset]);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded shadow-md">
+    <div className="max-w-lg mx-auto p-6 bg-white rounded shadow-md my-10">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">{title}</h1>
       <form
         onSubmit={handleSubmit((data) => mutate(data))}
@@ -82,7 +82,7 @@ export default function ProductForm({
           <label className="block text-sm font-medium text-gray-800">
             Título
           </label>
-          <input {...register("title")} className="w-full p-2 border rounded" />
+          <input {...register("title")} className="w-full p-2 border rounded text-gray-700 " />
           {errors.title && (
             <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
@@ -96,7 +96,7 @@ export default function ProductForm({
             type="number"
             step="0.01"
             {...register("price")}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-700 "
           />
           {errors.price && (
             <p className="text-red-500 text-sm">{errors.price.message}</p>
@@ -109,7 +109,7 @@ export default function ProductForm({
           </label>
           <textarea
             {...register("description")}
-            className="w-full p-2 border rounded"
+            className="w-full h-32 p-2 border rounded text-gray-700 "
           ></textarea>
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
@@ -122,7 +122,7 @@ export default function ProductForm({
           </label>
           <input
             {...register("category")}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-700 "
           />
           {errors.category && (
             <p className="text-red-500 text-sm">{errors.category.message}</p>
@@ -133,7 +133,7 @@ export default function ProductForm({
           <label className="block text-sm font-medium text-gray-800">
             Imagem (URL)
           </label>
-          <input {...register("image")} className="w-full p-2 border rounded" />
+          <input {...register("image")} className="w-full p-2 border rounded text-gray-700 " />
           {errors.image && (
             <p className="text-red-500 text-sm">{errors.image.message}</p>
           )}
@@ -147,7 +147,7 @@ export default function ProductForm({
             type="number"
             step="0.1"
             {...register("rating.rate")}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-700 "
           />
           {errors.rating?.rate && (
             <p className="text-red-500 text-sm">{errors.rating.rate.message}</p>
@@ -161,7 +161,7 @@ export default function ProductForm({
           <input
             type="number"
             {...register("rating.count")}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-700 "
           />
           {errors.rating?.count && (
             <p className="text-red-500 text-sm">

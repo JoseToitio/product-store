@@ -30,7 +30,7 @@ export const createProduct = async (data: IProduct) => {
   return response.json();
 };
 
-export const updateProductsById = async (id: string, data: IProduct) => {
+export const updateProductsById = async (id: number, data: IProduct) => {
   const response = await fetch(`${API_URL}/products/${id}`,  {
     method: "PUT",
     body: JSON.stringify(data),
@@ -40,7 +40,7 @@ export const updateProductsById = async (id: string, data: IProduct) => {
   return response.json();
 };
 
-export const deleteProductById = async (id: string) => {
+export const deleteProductById = async (id: number) => {
   const response = await fetch(`${API_URL}/products/${id}`, {
     method: "DELETE",
   });
