@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Alert from "@/components/Alert";
 import { useProducts } from "@/hooks/useProducts";
 import { StarIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -12,15 +14,21 @@ export function classNames(...classes: string[]) {
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+  const [openAlert, setOpenAlert] = useState(false);
   const productId = Number(id);
 
   if (isNaN(productId)) {
     notFound();
   }
 
-  const { getProductById } = useProducts();
+  const { getProductById, deleteProductMutation } = useProducts();
   const product = getProductById(productId);
 
+  const handleDelete = () => {
+    deleteProductMutation(productId)
+    router.push('/')
+  }
   if (!product) {
     return (
       <div className="text-xl font-semibold text-gray-950 mt-1">
@@ -39,6 +47,7 @@ export default function ProductPage() {
 
   return (
     <div className="container mx-auto py-16 px-4">
+      {openAlert && <Alert setAlert={setOpenAlert} onConfirm={handleDelete}/>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <img
           src={product.image}
@@ -83,11 +92,16 @@ export default function ProductPage() {
                 </>
               )}
           </div>
+          <div className="flex gap-4">
           <Link href={`/edit-product/${productId}`}>
             <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
               Editar Produto
             </button>
           </Link>
+          <button className="mt-4 px-6 py-3 bg-red-600 text-white rounded-md hover:bg-red-700" onClick={ () => setOpenAlert(true)}>
+            Excluir Produto
+          </button>
+          </div>
         </div>
       </div>
     </div>
