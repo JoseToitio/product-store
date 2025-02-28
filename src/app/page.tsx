@@ -13,7 +13,7 @@ export default function Home() {
   const { products, loadingGetProducts, errorGetProducts } = useProducts();
   const [page, setPage] = useState(1);
   const [categoryFilter, setCategoryFilter] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("asc");
+  const [sortOrder, setSortOrder] = useState<string>("default");
 
   const limit = 8;
 
@@ -26,16 +26,27 @@ export default function Home() {
     ? products.filter((product) => product.category === categoryFilter)
     : products;
 
-  const sortedProducts = useMemo(() => {
-    return [...filteredProducts].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.price - b.price;
-      } else {
-        return b.price - a.price;
-      }
-    });
-  }, [filteredProducts, sortOrder]);
+    const sortedProducts = useMemo(() => {
+      return [...filteredProducts].sort((a, b) => {
+        const aRating = a.rating?.rate ?? 0;
+        const bRating = b.rating?.rate ?? 0;
 
+        if (sortOrder === "default") {
+          const aHighRating = aRating > 4.5 ? 1 : 0;
+          const bHighRating = bRating > 4.5 ? 1 : 0;
+    
+          if (aHighRating !== bHighRating) {
+            return bHighRating - aHighRating;
+          }
+        }
+
+        if (sortOrder === "asc") return a.price - b.price;
+        if (sortOrder === "desc") return b.price - a.price;
+    
+        return 0;
+      });
+    }, [filteredProducts, sortOrder]);
+    
   if (loadingGetProducts) return <p>Carregando...</p>;
   if (errorGetProducts) return <p>Erro ao carregar produtos</p>;
 
@@ -70,6 +81,7 @@ export default function Home() {
             onChange={(e) => setSortOrder(e.target.value)}
             value={sortOrder}
           >
+            <option value="default">Selecionar filtro</option>
             <option value="asc">Preço: Menor para Maior</option>
             <option value="desc">Preço: Maior para Menor</option>
           </select>
