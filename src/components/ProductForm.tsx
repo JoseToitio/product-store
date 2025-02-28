@@ -1,7 +1,6 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UseMutateFunction } from "@tanstack/react-query";
 import { IProduct } from "@/services/types";
 import { useEffect } from "react";
 
@@ -31,7 +30,7 @@ const productSchema = yup.object().shape({
 });
 
 interface IProductForm {
-  onSubmit: UseMutateFunction<unknown, Error, IProduct, unknown>;
+  onSubmit: (product: IProduct) => void;
   isPending: boolean;
   title: string;
   buttonTitle?: string;
