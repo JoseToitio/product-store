@@ -62,7 +62,7 @@ export default function ProductForm({
   }, [initialData, reset]);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded shadow-md my-10">
+    <div className="p-6 bg-white rounded shadow-md my-5">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">{title}</h1>
       <form
         onSubmit={handleSubmit((data) => onSubmit(data))}

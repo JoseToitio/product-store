@@ -55,13 +55,13 @@ export default function Alert({ setAlert, onConfirm }: IAlert) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth={1.5}
               stroke="currentColor"
               className="size-5"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               />
             </svg>
@@ -70,7 +70,7 @@ export default function Alert({ setAlert, onConfirm }: IAlert) {
           <button
             type="button"
             className="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800"
-            onClick={handleClose} // Fecha o popup
+            onClick={handleClose}
           >
             Cancelar
           </button>

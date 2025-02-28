@@ -2,6 +2,7 @@
 "use client";
 
 import Alert from "@/components/Alert";
+import BackButton from "@/components/BackButton";
 import { useProducts } from "@/hooks/useProducts";
 import { StarIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
@@ -47,6 +48,7 @@ export default function ProductPage() {
 
   return (
     <div className="container mx-auto py-16 px-4">
+      <BackButton />
       {openAlert && <Alert setAlert={setOpenAlert} onConfirm={handleDelete}/>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <img

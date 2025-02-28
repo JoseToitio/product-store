@@ -1,5 +1,6 @@
 "use client";
 
+import BackButton from "@/components/BackButton";
 import ProductForm from "@/components/ProductForm";
 import { useProducts } from "@/hooks/useProducts";
 import { IProduct } from "@/services/types";
@@ -10,15 +11,18 @@ export default function NewProductPage() {
   const { createProductMutation } = useProducts();
 
   const handleSubmit = (newProduct: IProduct) => {
-    console.log('cai aqui')
+    console.log("cai aqui");
     createProductMutation(newProduct);
     router.push("/");
   };
   return (
-    <ProductForm
-      onSubmit={handleSubmit}
-      isPending={false}
-      title="Adicionar Novo Produto"
-    />
+    <div className="max-w-xl mx-auto p-6">
+      <BackButton />
+      <ProductForm
+        onSubmit={handleSubmit}
+        isPending={false}
+        title="Adicionar Novo Produto"
+      />
+    </div>
   );
 }
