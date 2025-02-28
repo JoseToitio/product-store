@@ -11,7 +11,6 @@ export default function NewProductPage() {
   const { createProductMutation } = useProducts();
 
   const handleSubmit = (newProduct: IProduct) => {
-    console.log("cai aqui");
     createProductMutation(newProduct);
     router.push("/");
   };
