@@ -8,7 +8,7 @@ const productSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, "O título deve ter pelo menos 3 caracteres")
-    .max(30, "O título deve ter menos de 30 caracteres" )
+    .max(30, "O título deve ter menos de 30 caracteres")
     .required("Campo obrigatório"),
   price: yup
     .number()
@@ -41,7 +41,7 @@ export default function ProductForm({
   onSubmit,
   isPending,
   title,
-  buttonTitle = 'Adicionar Produto',
+  buttonTitle = "Adicionar Produto",
   initialData,
 }: IProductForm) {
   const {
@@ -68,10 +68,14 @@ export default function ProductForm({
         className="space-y-4"
       >
         <div>
-          <label className="block text-sm font-medium text-gray-800">
+          <label
+            className="block text-sm font-medium text-gray-800"
+            htmlFor="title"
+          >
             Título
           </label>
           <input
+            id="title"
             {...register("title")}
             className="w-full p-2 border rounded text-gray-700 "
           />
@@ -81,7 +85,10 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-800">
+          <label
+            className="block text-sm font-medium text-gray-800"
+            htmlFor="price"
+          >
             Preço
           </label>
           <input
@@ -89,6 +96,7 @@ export default function ProductForm({
             step="0.01"
             {...register("price")}
             className="w-full p-2 border rounded text-gray-700 "
+            id="price"
           />
           {errors.price && (
             <p className="text-red-500 text-sm">{errors.price.message}</p>
@@ -96,12 +104,16 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-800">
+          <label
+            className="block text-sm font-medium text-gray-800"
+            htmlFor="description"
+          >
             Descrição
           </label>
           <textarea
             {...register("description")}
             className="w-full h-32 p-2 border rounded text-gray-700 "
+            id="description"
           ></textarea>
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
@@ -109,11 +121,15 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-800">
+          <label
+            className="block text-sm font-medium text-gray-800"
+            htmlFor="category"
+          >
             Categoria
           </label>
           <input
             disabled={initialData && true}
+            id="category"
             {...register("category")}
             className="w-full p-2 border rounded text-gray-700 "
           />
@@ -123,10 +139,11 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-800">
+          <label className="block text-sm font-medium text-gray-800" htmlFor="image">
             Imagem (URL)
           </label>
           <input
+            id="image"
             {...register("image")}
             className="w-full p-2 border rounded text-gray-700 "
           />
